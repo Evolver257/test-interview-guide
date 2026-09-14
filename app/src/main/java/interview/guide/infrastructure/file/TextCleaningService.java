@@ -18,7 +18,7 @@ public class TextCleaningService {
      * 整行匹配，防止误删正文中的文件名字符串
      */
     private static final Pattern IMAGE_FILENAME_LINE =
-            Pattern.compile("(?m)^image\\d+\\.(png|jpe?g|gif|bmp|webp)\\s*$");
+            Pattern.compile("(?im)^image\\d+\\.(png|jpe?g|gif|bmp|webp)\\s*$");
 
     /**
      * HTTP/HTTPS 图片链接
@@ -113,8 +113,10 @@ public class TextCleaningService {
      */
     public String cleanTextWithLimit(String text, int maxLength) {
         String cleaned = cleanText(text);
-        if (cleaned.length() > maxLength) {
-            return cleaned.substring(0, maxLength);
+        int codePointCount = cleaned.codePointCount(0, cleaned.length());
+        if (codePointCount > maxLength) {
+            int endIndex = cleaned.offsetByCodePoints(0, maxLength);
+            return cleaned.substring(0, endIndex);
         }
         return cleaned;
     }
