@@ -104,9 +104,3 @@ app/src/test/java/interview/guide/modules/resume/service/ResumeReanalyzeServiceT
 | 罗文 | M202681090 | 文本清理测试、Unicode边界分析、DEF-002复现与修复记录、成果汇报 | 40% |
 | 邱铭曦 | M202681088 | 面试日程需求分析与测试、DEF-001复现与修复记录、合并文档整理 | 30% |
 | 陆畅 | M202681089 | 文件校验、文件哈希和上传流程测试、DEF-003复现与修复记录 | 30% |
-
-各成员使用个人 GitHub 账号提交本人负责的代码和文档，个人贡献以 Git 提交记录为依据。
-
-## 作业材料
-
-课程测试说明和交付材料位于 [`coursework/`](coursework/README.md)，包括测试用例清单、测试报告、缺陷报告、执行证据和关键 AI 对话记录。
