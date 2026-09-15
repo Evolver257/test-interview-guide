@@ -213,4 +213,24 @@ class InterviewScheduleServiceTest {
       verify(repository, times(1)).deleteById(31L);
     }
   }
+
+  private static CreateInterviewRequest request(String companyName, String position) {
+    CreateInterviewRequest request = new CreateInterviewRequest();
+    request.setCompanyName(companyName);
+    request.setPosition(position);
+    request.setInterviewTime(INTERVIEW_TIME);
+    return request;
+  }
+
+  private static InterviewScheduleEntity entity(
+          long id, String companyName, String position, InterviewStatus status) {
+    InterviewScheduleEntity entity = new InterviewScheduleEntity();
+    entity.setId(id);
+    entity.setCompanyName(companyName);
+    entity.setPosition(position);
+    entity.setInterviewTime(INTERVIEW_TIME);
+    entity.setRoundNumber(1);
+    entity.setStatus(status);
+    return entity;
+  }
 }
