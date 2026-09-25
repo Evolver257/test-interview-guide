@@ -84,11 +84,15 @@ public class FileValidationService {
             return false;
         }
         
-        String lowerContentType = contentType.toLowerCase();
+        String lowerContentType = contentType.trim().toLowerCase();
         return allowedTypes.stream()
+            .filter(allowed -> allowed != null && !allowed.isBlank())
             .anyMatch(allowed -> {
-                String lowerAllowed = allowed.toLowerCase();
-                return lowerContentType.contains(lowerAllowed) || lowerAllowed.contains(lowerContentType);
+                String lowerAllowed = allowed.trim().toLowerCase();
+                // 完整 MIME 规则必须精确匹配；短标识（如 pdf）仍支持部分匹配。
+                return lowerAllowed.contains("/")
+                    ? lowerContentType.equals(lowerAllowed)
+                    : lowerContentType.contains(lowerAllowed);
             });
     }
     
