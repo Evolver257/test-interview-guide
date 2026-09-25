@@ -80,10 +80,12 @@ public class PromptSanitizer {
         }
         var delimMatcher = DELIMITER_INJECTION_PATTERN.matcher(result);
         if (delimMatcher.find()) {
+            injected = true;
             result = delimMatcher.replaceAll("[filtered-delimiter]");
         }
         var tagMatcher = BOUNDARY_TAG_PATTERN.matcher(result);
         if (tagMatcher.find()) {
+            injected = true;
             result = tagMatcher.replaceAll("[filtered-boundary-tag]");
         }
 
@@ -113,7 +115,9 @@ public class PromptSanitizer {
             return false;
         }
         return ROLE_INJECTION_PATTERN.matcher(text).find()
-            || INJECTION_PHRASE_PATTERN.matcher(text).find();
+            || INJECTION_PHRASE_PATTERN.matcher(text).find()
+            || DELIMITER_INJECTION_PATTERN.matcher(text).find()
+            || BOUNDARY_TAG_PATTERN.matcher(text).find();
     }
 
     private boolean isSanitizerEnabled() {
